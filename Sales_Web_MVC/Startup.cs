@@ -37,7 +37,8 @@ namespace Sales_Web_MVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<Sales_Web_MVCContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("Sales_Web_MVCContext")));
+                    options.UseMySql(Configuration.GetConnectionString("Sales_Web_MVCContext"), builder =>
+                    builder.MigrationsAssembly("Sales_Web_MVC")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +48,7 @@ namespace Sales_Web_MVC
             {
                 app.UseDeveloperExceptionPage();
             }
+
             else
             {
                 app.UseExceptionHandler("/Home/Error");
